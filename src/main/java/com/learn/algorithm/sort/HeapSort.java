@@ -60,7 +60,7 @@ public class HeapSort {
   /**
    * 建立最大堆
    */
-  private static void buildMaxHeap(int arr[], int size) {
+  private static void buildMaxHeap(int[] arr, int size) {
     for (int i = size / 2 - 1; i >= 0; --i)
       maxHeapify(arr, i, size);
   }
@@ -70,7 +70,7 @@ public class HeapSort {
    *
    * @param arr 原数组
    */
-  private static void heapSort(int arr[]) {
+  private static void heapSort(int[] arr) {
     int length = arr.length;
     buildMaxHeap(arr, length);
     for (int i = length - 1; i >= 1; i--) {
@@ -80,7 +80,50 @@ public class HeapSort {
     }
   }
 
-  public static void main(String[] args) {
+  /**
+   * 最大优先队列-返回最大值
+   */
+  public static int heapMaximum(int[] arr) {
+    return arr[0];
+  }
+
+  /**
+   * 最大优先队列-去除最大值
+   */
+  public static int heapExtractMax(int[] arr) throws Exception {
+    if (arr.length < 1) {
+      throw new Exception("");
+    }
+    int max = arr[0];
+    arr[0] = arr[arr.length - 1];
+    maxHeapify(arr, 0, arr.length - 1);
+    return max;
+  }
+
+  /**
+   * 最大优先队列-元素i的key值增加到k之后
+   */
+  public static void heapIncreaseKey(int[] arr, int i, int k) throws Exception {
+    if (k < arr[i]) {
+      throw new Exception("new key is smaller than current key");
+    }
+    arr[i] = k;
+    while (i > 0 && arr[parent(i)] < arr[i]) {
+      swap(arr, parent(i), i);
+      i = parent(i);
+    }
+  }
+
+  public static int[] maxHeapInsert(int[] arr, int i) throws Exception {
+    int[] temp = new int[arr.length + 1];
+    System.arraycopy(arr, 0, temp, 0, arr.length);
+    temp[arr.length] = Integer.MIN_VALUE;
+    heapIncreaseKey(temp, temp.length - 1, i);
+    return temp;
+  }
+
+
+  public static void main(String[] args) throws Exception {
     int[] a = {5, 2, 4, 6, 1, 3, 2, 6, 10};
     System.out.println("==========a=============");
     maxHeapify(a, 0, a.length);
@@ -102,5 +145,8 @@ public class HeapSort {
 
     heapSort(a1);
     System.out.println(Arrays.toString(a1));
+
+    System.out.println(Arrays.toString(maxHeapInsert(a1, 20)));
+
   }
 }
