@@ -1,11 +1,5 @@
 package com.learn.data_structure.singleLinkedList;
 
-import java.util.HashSet;
-import java.util.Set;
-
-/**
- * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/
- */
 public class Solution83 {
   public static class ListNode {
     int val;
@@ -17,24 +11,40 @@ public class Solution83 {
   }
 
   public static ListNode deleteDuplicates(ListNode head) {
-    Set<Integer> set = new HashSet<>();
     if (head == null || head.next == null) {
       return head;
     }
     ListNode front = head;
-    set.add(head.val);
     ListNode temp = head.next;
     while (temp != null) {
-      if (set.contains(temp.val)) {
+      if (front.val == temp.val) {
         front.next = temp.next;
         temp = temp.next;
       } else {
-        set.add(temp.val);
         front = front.next;
         temp = temp.next;
       }
     }
     return head;
+//    排除不连续
+//    Set<Integer> set = new HashSet<>();
+//    if (head == null || head.next == null) {
+//      return head;
+//    }
+//    ListNode front = head;
+//    set.add(head.val);
+//    ListNode temp = head.next;
+//    while (temp != null) {
+//      if (set.contains(temp.val)) {
+//        front.next = temp.next;
+//        temp = temp.next;
+//      } else {
+//        set.add(temp.val);
+//        front = front.next;
+//        temp = temp.next;
+//      }
+//    }
+//    return head;
   }
 
   public static void main(String[] args) {
