@@ -13,13 +13,14 @@ public class Solution24 {
         ListNode prev = new ListNode(-1);
         prev.next = head;
         ListNode result = prev;
-        while (prev.next != null && prev.next.next != null) {
-            ListNode first = prev.next;
-            ListNode second = prev.next.next;
+        while (head != null && head.next != null) {
+            ListNode first = head;
+            ListNode second = head.next;
             prev.next = second;
             first.next = second.next;
             second.next = first;
             prev = first;
+            head = first.next;
         }
         return result.next;
     }
