@@ -1,4 +1,4 @@
-package com.learn.array;
+package com.learn.algorithm.array;
 
 import java.util.ArrayList;
 import java.util.List;

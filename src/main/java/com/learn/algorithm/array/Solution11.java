@@ -1,4 +1,4 @@
-package com.learn.array;
+package com.learn.algorithm.array;
 
 /**
  * @author zhaoyue23
